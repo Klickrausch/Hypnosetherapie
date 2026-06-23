@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hypnotherapie Düsseldorf | Stefanie Trilling</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     /*
@@ -1229,6 +1229,66 @@
       .footer__links { gap: 12px; }
     }
 
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,26,46,0.75);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal__box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      color: var(--text-mid);
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+
+    .modal__box h2 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--trust-blue);
+      margin-bottom: 24px;
+    }
+
+    .modal__box h3 {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--trust-blue);
+      margin: 28px 0 8px;
+    }
+
+    .modal__box p { margin-bottom: 12px; }
+    .modal__box a { color: var(--gold-deep); }
+
+    .modal__close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none; border: none;
+      font-size: 1.2rem;
+      color: var(--text-mid);
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .modal__close:hover { color: var(--trust-blue); }
+
+    @media (max-width: 600px) {
+      .modal__box { padding: 32px 20px; }
+    }
+
     /* WHATSAPP BUTTON */
     .wa-button {
       position: fixed;
@@ -1944,12 +2004,82 @@
     </div>
 
     <ul class="footer__links">
-      <li><a href="#">Impressum</a></li>
-      <li><a href="#">Datenschutz</a></li>
-      <li><a href="#">Kontakt</a></li>
-      <li><a href="#">Zurück zur Hauptseite</a></li>
+      <li><a href="#" onclick="document.getElementById('modal-impressum').style.display='flex';return false;">Impressum</a></li>
+      <li><a href="#" onclick="document.getElementById('modal-datenschutz').style.display='flex';return false;">Datenschutz</a></li>
+      <li><a href="mailto:hpp@stefanietrilling.de">Kontakt</a></li>
+      <li><a href="https://www.stefanietrilling.de" target="_blank">Zurück zur Hauptseite</a></li>
     </ul>
   </footer>
+
+
+  <!-- MODAL: IMPRESSUM -->
+  <div id="modal-impressum" class="modal" onclick="if(event.target===this)this.style.display='none'">
+    <div class="modal__box">
+      <button class="modal__close" onclick="document.getElementById('modal-impressum').style.display='none'">✕</button>
+      <h2>Impressum</h2>
+      <p><strong>Angaben gemäß § 5 DDG</strong></p>
+
+      <p>Stefanie Trilling<br />
+      Heilpraktikerin für Psychotherapie<br />
+      Heinrich-Heine-Straße 30<br />
+      40699 Erkrath</p>
+
+      <p><strong>Praxis:</strong><br />
+      Therapy Loft Düsseldorf<br />
+      Höherweg 270<br />
+      40231 Düsseldorf</p>
+
+      <p><strong>Kontakt:</strong><br />
+      Telefon: 0176 62504034<br />
+      E-Mail: <a href="mailto:hpp@stefanietrilling.de">hpp@stefanietrilling.de</a></p>
+
+      <p><strong>Berufsbezeichnung und berufsrechtliche Regelungen:</strong><br />
+      Berufsbezeichnung: Heilpraktikerin für Psychotherapie<br />
+      Zuständige Aufsichtsbehörde: Gesundheitsamt Krefeld<br />
+      Berufsrechtliche Regelung: Heilpraktikergesetz (HeilprG)</p>
+
+      <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</strong><br />
+      Stefanie Trilling, Heinrich-Heine-Straße 30, 40699 Erkrath</p>
+    </div>
+  </div>
+
+
+  <!-- MODAL: DATENSCHUTZERKLÄRUNG -->
+  <div id="modal-datenschutz" class="modal" onclick="if(event.target===this)this.style.display='none'">
+    <div class="modal__box">
+      <button class="modal__close" onclick="document.getElementById('modal-datenschutz').style.display='none'">✕</button>
+      <h2>Datenschutzerklärung</h2>
+
+      <h3>1. Verantwortliche</h3>
+      <p>Stefanie Trilling<br />
+      Heinrich-Heine-Straße 30, 40699 Erkrath<br />
+      E-Mail: hpp@stefanietrilling.de<br />
+      Tel: 0176 62504034</p>
+
+      <h3>2. Hosting (GitHub Pages)</h3>
+      <p>Diese Website wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite wird Ihre IP-Adresse technisch bedingt an GitHub-Server übertragen. GitHub ist unter dem EU-US Data Privacy Framework zertifiziert. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb der Website). Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">GitHub Privacy Statement</a>.</p>
+
+      <h3>3. Schriftarten (Bunny Fonts)</h3>
+      <p>Diese Seite verwendet Schriftarten von Bunny Fonts (Bunny.net, EU). Bunny Fonts speichert keine IP-Adressen und setzt keine Cookies. Es findet kein Drittstaatentransfer statt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
+
+      <h3>4. Terminbuchung (Calendly)</h3>
+      <p>Zur Terminvereinbarung wird auf den Dienst Calendly (Calendly LLC, 271 17th St NW, Atlanta, GA 30363, USA) verlinkt. Wenn Sie auf den Calendly-Link klicken und dort einen Termin buchen, verarbeitet Calendly Ihre eingegebenen Daten (Name, E-Mail, ggf. Telefon). Calendly ist unter dem EU-US Data Privacy Framework zertifiziert. Die Datenschutzerklärung von Calendly finden Sie unter <a href="https://calendly.com/privacy" target="_blank">calendly.com/privacy</a>. Rechtsgrundlage für die Verarbeitung durch uns: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung).</p>
+
+      <h3>5. WhatsApp-Kontakt</h3>
+      <p>Auf dieser Seite befindet sich ein Link zur Kontaktaufnahme via WhatsApp (Meta Platforms Ireland Ltd.). Wenn Sie diesen Link anklicken und WhatsApp öffnen, gelten die Datenschutzbestimmungen von Meta/WhatsApp. Die Nutzung ist freiwillig. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktives Anklicken).</p>
+
+      <h3>6. Kontaktaufnahme per E-Mail oder Telefon</h3>
+      <p>Wenn Sie per E-Mail oder Telefon Kontakt aufnehmen, werden Ihre Angaben zur Bearbeitung der Anfrage und für mögliche Anschlussfragen gespeichert. Die Daten werden nicht ohne Ihre Einwilligung weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO bzw. lit. b DSGVO bei Vertragsanbahnung.</p>
+
+      <h3>7. Ihre Rechte</h3>
+      <p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21 DSGVO). Zur Ausübung Ihrer Rechte wenden Sie sich an: hpp@stefanietrilling.de</p>
+
+      <p>Sie haben zudem das Recht, sich bei der zuständigen Datenschutzaufsichtsbehörde zu beschweren. Die zuständige Behörde ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), Kavalleriestr. 2–4, 40213 Düsseldorf, <a href="https://www.ldi.nrw.de" target="_blank">www.ldi.nrw.de</a>.</p>
+
+      <h3>8. Hinweis zu Google Ads</h3>
+      <p>Diese Seite kann über Google Ads beworben werden. Sobald Google-Ads-Conversion-Tracking oder Remarketing-Tags aktiv sind, werden wir einen Cookie-Banner einbinden und diese Datenschutzerklärung entsprechend aktualisieren.</p>
+    </div>
+  </div>
 
 
   <!-- WhatsApp Floating Button – Nummer ersetzen: 49XXXXXXXXXX -->
