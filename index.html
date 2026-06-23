@@ -1289,6 +1289,86 @@
       .modal__box { padding: 32px 20px; }
     }
 
+    /* Cookie Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      background: var(--deep-night);
+      border-top: 1px solid rgba(201,169,110,0.2);
+      padding: 20px 24px;
+    }
+
+    .cookie-banner__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .cookie-banner__text {
+      flex: 1;
+      color: rgba(245,240,232,0.8);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .cookie-banner__text strong {
+      display: block;
+      color: var(--cream);
+      margin-bottom: 4px;
+      font-size: 0.88rem;
+    }
+
+    .cookie-banner__text p { margin: 0; }
+    .cookie-banner__text a { color: var(--gold-light); }
+
+    .cookie-banner__actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 11px 22px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .cookie-btn--decline {
+      background: transparent;
+      border: 1px solid rgba(201,169,110,0.35);
+      color: rgba(245,240,232,0.75);
+    }
+
+    .cookie-btn--decline:hover {
+      border-color: var(--gold-light);
+      color: var(--cream);
+    }
+
+    .cookie-btn--accept {
+      background: linear-gradient(135deg, var(--gold-deep), var(--gold-light));
+      color: var(--white);
+    }
+
+    .cookie-btn--accept:hover {
+      box-shadow: 0 4px 16px rgba(139,111,71,0.4);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 700px) {
+      .cookie-banner__inner { flex-direction: column; gap: 16px; }
+      .cookie-banner__actions { width: 100%; }
+      .cookie-btn { flex: 1; text-align: center; }
+    }
+
     /* WHATSAPP BUTTON */
     .wa-button {
       position: fixed;
@@ -2094,7 +2174,49 @@
     <span>WhatsApp schreiben</span>
   </a>
 
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none">
+    <div class="cookie-banner__inner">
+      <div class="cookie-banner__text">
+        <strong>Cookies &amp; Datenschutz</strong>
+        <p>Diese Website nutzt technisch notwendige Dienste. Sobald wir Google Ads Conversion-Tracking einsetzen, werden wir deine Einwilligung für Marketing-Cookies benötigen. Du kannst deine Auswahl jederzeit im <a href="#" onclick="document.getElementById('modal-datenschutz').style.display='flex';return false;">Datenschutz</a> widerrufen.</p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="cookie-btn cookie-btn--decline" onclick="cookieDecline()">Nur notwendige</button>
+        <button class="cookie-btn cookie-btn--accept" onclick="cookieAccept()">Alle akzeptieren</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Cookie Consent
+    function cookieAccept() {
+      localStorage.setItem('cookie_consent', 'accepted');
+      document.getElementById('cookie-banner').style.display = 'none';
+      // GTM wird hier geladen sobald die ID eingetragen wird
+      // loadGTM('GTM-XXXXXXX');
+    }
+
+    function cookieDecline() {
+      localStorage.setItem('cookie_consent', 'declined');
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    function loadGTM(id) {
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer',id);
+    }
+
+    // Banner anzeigen wenn noch keine Wahl getroffen
+    if (!localStorage.getItem('cookie_consent')) {
+      document.getElementById('cookie-banner').style.display = 'block';
+    } else if (localStorage.getItem('cookie_consent') === 'accepted') {
+      // loadGTM('GTM-XXXXXXX');
+    }
+
     document.querySelectorAll('.faq__q').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.parentElement;
